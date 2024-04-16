@@ -5,17 +5,16 @@ objFSO = win32.Dispatch("Scripting.FileSystemObject")
 ShellObj = win32.Dispatch("Shell.Application")
 clawPDFQueue = win32.Dispatch("clawPDF.JobQueue")
 
-fullPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\TestPagePDFwithPassword.pdf")
+fullPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\TestPage.txt")
 
 print("Initializing clawPDF queue...")
 clawPDFQueue.Initialize()
 
-print("Printing a windows testpage")
-ShellObj.ShellExecute("RUNDLL32.exe", "PRINTUI.DLL,PrintUIEntry /k /n \"clawPDF\"", "", "open", 1)
+print("Please print to clawPDF ...")
 
 print("Waiting for the job to arrive at the queue...")
-if not clawPDFQueue.WaitForJob(10):
-    print("The print job did not reach the queue within 10 seconds")
+if not clawPDFQueue.WaitForJob(60):
+    print("The print job did not reach the queue within 60 seconds")
 else:
     print("Currently there are", clawPDFQueue.Count, "job(s) in the queue")
     print("Getting job instance")
@@ -23,17 +22,9 @@ else:
 
     printJob.SetProfileByGuid("DefaultGuid")
 
-    print("Enable Security Settings")
+    print("Processing print job content")
 
-    printJob.SetProfileSetting("PdfSettings.Security.Enabled", "true")
-    printJob.SetProfileSetting("PdfSettings.Security.RequireUserPassword", "true")
-
-    printJob.SetProfileSetting("PdfSettings.Security.EncryptionLevel", "Aes128Bit")
-
-    print("Password: test")
-
-    printJob.SetProfileSetting("PdfSettings.Security.OwnerPassword", "test")
-    printJob.SetProfileSetting("PdfSettings.Security.UserPassword", "test")
+    printJob.SetProfileSetting("OutputFormat", "Txt")
 
     out_dir = os.path.dirname(fullPath)
     if not os.path.exists(out_dir):
