@@ -38,7 +38,7 @@ else:
 print("Releasing the object")
 clawPDFQueue.ReleaseCom()
 
-import fitz # pip install PyMuPDF
+import fitz # pip install PyMuPDF # https://stackoverflow.com/a/63518022/3405291
 
 with fitz.open(fullPath) as doc:
     text = ""
