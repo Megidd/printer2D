@@ -37,3 +37,12 @@ else:
 
 print("Releasing the object")
 clawPDFQueue.ReleaseCom()
+
+import fitz # pip install PyMuPDF
+
+with fitz.open(fullPath) as doc:
+    text = ""
+    for page in doc:
+        text += page.get_text()
+
+print(text)
