@@ -5,7 +5,7 @@ objFSO = win32.Dispatch("Scripting.FileSystemObject")
 ShellObj = win32.Dispatch("Shell.Application")
 clawPDFQueue = win32.Dispatch("clawPDF.JobQueue")
 
-fullPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\TestPage.txt")
+fullPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\TestPage.pdf")
 
 print("Initializing clawPDF queue...")
 clawPDFQueue.Initialize()
@@ -22,15 +22,12 @@ else:
 
     printJob.SetProfileByGuid("DefaultGuid")
 
-    print("Processing print job content")
-
-    printJob.SetProfileSetting("OutputFormat", "Txt")
-
     out_dir = os.path.dirname(fullPath)
     if not os.path.exists(out_dir):
         print("Creating output directory:", out_dir)
         os.makedirs(out_dir)
 
+    printJob.SetProfileSetting("OutputFormat", "Pdf")
     printJob.ConvertTo(fullPath)
 
     if (not printJob.IsFinished or not printJob.IsSuccessful):
