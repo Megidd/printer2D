@@ -1,4 +1,5 @@
 import os
+import re
 import win32com.client as win32
 
 objFSO = win32.Dispatch("Scripting.FileSystemObject")
@@ -47,3 +48,6 @@ with fitz.open(fullPath) as doc:
         text += page.get_text()
 
 print(text)
+
+matches = re.findall(r"\b(\d+mm)\b", text)
+print(matches)
