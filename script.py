@@ -58,3 +58,8 @@ numbers = [int(re.search(r'\d+', item).group()) for item in matches]
 filtered_numbers = [num for num in numbers if num > 5]
 
 print(filtered_numbers)
+
+from utils.csv import find_and_delete_row
+
+find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
+print("Finished")
