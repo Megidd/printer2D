@@ -1,4 +1,6 @@
 import csv
+from utils.overwrite import move_and_overwrite
+from utils.tempfile import create_temp_file
 
 def find_and_delete_row(filename, varl_value=600, varw_value=700):
   id = ""
@@ -7,7 +9,9 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
   floor = ""
   unit = ""
 
-  with open(filename, 'r', newline='') as csvfile, open(filename + '_modified.csv', 'w', newline='') as new_file:
+  tmpFile = create_temp_file("CUTTING-LIST-", ".csv")
+
+  with open(filename, 'r', newline='') as csvfile, open(tmpFile, 'w', newline='') as new_file:
     reader = csv.reader(csvfile)
     writer = csv.writer(new_file)
 
@@ -25,8 +29,5 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
     if not found:
       print(f"Line with VARL: {varl_value} and VARW: {varw_value} not found.")
 
+  move_and_overwrite(tmpFile, filename)
   return project, floor, unit, id, name
-
-  # Delete the original file (optional)
-  # import os
-  # os.remove(filename)

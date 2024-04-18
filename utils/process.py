@@ -7,7 +7,6 @@ from utils.pdf import add_image_and_text_to_pdf
 from utils.tempfile import create_temp_file
 
 def analyze(pdfPath):
-    
 
     with fitz.open(pdfPath) as doc:
         text = ""
