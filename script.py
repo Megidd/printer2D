@@ -28,6 +28,7 @@ else:
         os.makedirs(out_dir)
 
     printJob.SetProfileSetting("OutputFormat", "Pdf")
+    printJob.SetProfileSetting("OpenViewer", False)
     printJob.ConvertTo(fullPath)
 
     if (not printJob.IsFinished or not printJob.IsSuccessful):
