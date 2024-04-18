@@ -83,4 +83,4 @@ qrcode.save(
 
 from utils.pdf import add_image_and_text_to_pdf
 
-add_image_and_text_to_pdf(fullPath, qrPath, 50, 50, identity, 100, 100)
+add_image_and_text_to_pdf(fullPath, qrPath, 200, 100, identity, 200, 50)
