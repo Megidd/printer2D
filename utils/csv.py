@@ -10,9 +10,9 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
 
     found = False
     for row in reader:
-      if not found and row[3] == str(varl_value) and row[5] == str(varw_value) or \
-        not found and row[3] == str(varw_value) and row[5] == str(varl_value):
-        first_value, second_value = row[0], row[1]
+      if not found and row[6] == str(varl_value) and row[8] == str(varw_value) or \
+        not found and row[6] == str(varw_value) and row[8] == str(varl_value):
+        first_value, second_value = row[3], row[4]
         found = True
         print(f"Found line: {first_value}, {second_value}")
       else:
