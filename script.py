@@ -59,6 +59,9 @@ filtered_numbers = [num for num in numbers if num > 5]
 
 print(filtered_numbers)
 
+if len(filtered_numbers) < 2:
+  print("Not expected: the list has less than two items.")
+
 from utils.csv import find_and_delete_row
 
 find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
