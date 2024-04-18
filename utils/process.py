@@ -27,6 +27,7 @@ def analyze(pdfPath):
 
     if len(filtered_numbers) < 2:
         print("Not expected: the list has less than two items.")
+        return
 
     project, floor, unit, id, name = find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
     print(f"Found: ID: {id}, name: {name}")

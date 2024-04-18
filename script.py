@@ -1,26 +1,28 @@
 import os
 import win32com.client as win32
 
+from utils.process import analyze
+from utils.tempfile import create_temp_file
+from utils.overwrite import delete
+
 objFSO = win32.Dispatch("Scripting.FileSystemObject")
 ShellObj = win32.Dispatch("Shell.Application")
 clawPDFQueue = win32.Dispatch("clawPDF.JobQueue")
-
-from utils.process import analyze
-from utils.tempfile import create_temp_file
 
 print("Initializing clawPDF queue...")
 clawPDFQueue.Initialize()
 
 print("Please print to clawPDF ...")
 
-print("Waiting for the job to arrive at the queue...")
+production_mode = False
 
 while True:
+    print("Waiting for the job to arrive at the queue...")
     print("Currently there are", clawPDFQueue.Count, "job(s) in the queue")
     printJob = clawPDFQueue.WaitForFirstJob()
 
     printJob.SetProfileByGuid("DefaultGuid")
-    
+
     pdfPath = create_temp_file(prefix="WinCAM-label-", suffix=".pdf")
     print(f"Temp file created at: {pdfPath}")
 
@@ -38,8 +40,12 @@ while True:
     else:
         print("Job finished successfully")
 
-    analyze(pdfPath)        
+    analyze(pdfPath)
+
+    os.startfile(pdfPath, "print")
+
+    if production_mode:
+        delete(pdfPath)
 
 print("Releasing the object")
 clawPDFQueue.ReleaseCom()
-
