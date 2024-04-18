@@ -51,3 +51,10 @@ print(text)
 
 matches = re.findall(r"\b(\d+mm)\b", text)
 print(matches)
+
+numbers = [int(re.search(r'\d+', item).group()) for item in matches]
+
+# Filter the numbers greater than 5
+filtered_numbers = [num for num in numbers if num > 5]
+
+print(filtered_numbers)
