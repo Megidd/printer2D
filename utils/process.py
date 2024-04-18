@@ -1,8 +1,13 @@
+import fitz # pip install PyMuPDF # https://stackoverflow.com/a/63518022/3405291
 import os
 import re
+import segno
+from utils.csv import find_and_delete_row
+from utils.pdf import add_image_and_text_to_pdf
+from utils.tempfile import create_temp_file
 
 def analyze(pdfPath):
-    import fitz # pip install PyMuPDF # https://stackoverflow.com/a/63518022/3405291
+    
 
     with fitz.open(pdfPath) as doc:
         text = ""
@@ -24,26 +29,21 @@ def analyze(pdfPath):
     if len(filtered_numbers) < 2:
         print("Not expected: the list has less than two items.")
 
-    from utils.csv import find_and_delete_row
-
     project, floor, unit, id, name = find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
     print(f"Found: ID: {id}, name: {name}")
 
     identity = f"{id}-{name}"
 
-    import segno
-
     qrcode = segno.make_qr(identity)
 
-    qrPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..\Results\qrcode.png")
+    qrPath = create_temp_file("QR-", ".png")
+    print(f"Temp file created at: {qrPath}")
 
     qrcode.save(
         qrPath,
         scale=5,
         border=2,
     )
-
-    from utils.pdf import add_image_and_text_to_pdf
 
     add_image_and_text_to_pdf(pdfPath, qrPath, 200, 120, identity, 200, 50,\
                             f"Project: {project}", f"Floor: {floor}", f"Unit: {unit}")

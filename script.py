@@ -5,7 +5,8 @@ objFSO = win32.Dispatch("Scripting.FileSystemObject")
 ShellObj = win32.Dispatch("Shell.Application")
 clawPDFQueue = win32.Dispatch("clawPDF.JobQueue")
 
-fullPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\TestPage.pdf")
+from utils.process import analyze
+from utils.tempfile import create_temp_file
 
 print("Initializing clawPDF queue...")
 clawPDFQueue.Initialize()
@@ -19,23 +20,25 @@ while True:
     printJob = clawPDFQueue.WaitForFirstJob()
 
     printJob.SetProfileByGuid("DefaultGuid")
+    
+    pdfPath = create_temp_file(prefix="WinCAM-label-", suffix=".pdf")
+    print(f"Temp file created at: {pdfPath}")
 
-    out_dir = os.path.dirname(fullPath)
+    out_dir = os.path.dirname(pdfPath)
     if not os.path.exists(out_dir):
         print("Creating output directory:", out_dir)
         os.makedirs(out_dir)
 
     printJob.SetProfileSetting("OutputFormat", "Pdf")
     printJob.SetProfileSetting("OpenViewer", False)
-    printJob.ConvertTo(fullPath)
+    printJob.ConvertTo(pdfPath)
 
     if (not printJob.IsFinished or not printJob.IsSuccessful):
-        print("Could not convert the file:", fullPath)
+        print("Could not convert the file:", pdfPath)
     else:
         print("Job finished successfully")
 
-    from utils.process import analyze
-    analyze(fullPath)        
+    analyze(pdfPath)        
 
 print("Releasing the object")
 clawPDFQueue.ReleaseCom()
