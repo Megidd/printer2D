@@ -77,6 +77,10 @@ qrPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\qrcod
 
 qrcode.save(
     qrPath,
-    scale=20,
+    scale=5,
     border=2,
 )
+
+from utils.pdf import add_image_and_text_to_pdf
+
+add_image_and_text_to_pdf(fullPath, qrPath, 50, 50, identity, 100, 100)
