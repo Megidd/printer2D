@@ -66,3 +66,17 @@ from utils.csv import find_and_delete_row
 
 id, name = find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
 print(f"Found: ID: {id}, name: {name}")
+
+identity = f"{id}-{name}"
+
+import segno
+
+qrcode = segno.make_qr(identity)
+
+qrPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Results\qrcode.png")
+
+qrcode.save(
+    qrPath,
+    scale=20,
+    border=2,
+)
