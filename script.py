@@ -64,5 +64,5 @@ if len(filtered_numbers) < 2:
 
 from utils.csv import find_and_delete_row
 
-find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
-print("Finished")
+id, name = find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
+print(f"Found: ID: {id}, name: {name}")

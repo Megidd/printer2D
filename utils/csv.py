@@ -1,15 +1,8 @@
 import csv
 
 def find_and_delete_row(filename, varl_value=600, varw_value=700):
-  """
-  Finds the line with specific values after VARL and VARW, extracts the 1st and 2nd values,
-  and deletes that line from the CSV file.
-
-  Args:
-      filename: The path to the CSV file.
-      varl_value: The desired value after the VARL column (default: 600).
-      varw_value: The desired value after the VARW column (default: 700).
-  """
+  first_value = ""
+  second_value = ""
 
   with open(filename, 'r', newline='') as csvfile, open(filename + '_modified.csv', 'w', newline='') as new_file:
     reader = csv.reader(csvfile)
@@ -27,6 +20,8 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
 
     if not found:
       print(f"Line with VARL: {varl_value} and VARW: {varw_value} not found.")
+
+  return first_value, second_value
 
   # Delete the original file (optional)
   # import os
