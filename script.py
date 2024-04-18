@@ -64,7 +64,7 @@ if len(filtered_numbers) < 2:
 
 from utils.csv import find_and_delete_row
 
-id, name = find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
+project, floor, unit, id, name = find_and_delete_row("CUTTING-LIST.csv", filtered_numbers[0], filtered_numbers[1])
 print(f"Found: ID: {id}, name: {name}")
 
 identity = f"{id}-{name}"
@@ -83,4 +83,5 @@ qrcode.save(
 
 from utils.pdf import add_image_and_text_to_pdf
 
-add_image_and_text_to_pdf(fullPath, qrPath, 200, 100, identity, 200, 50)
+add_image_and_text_to_pdf(fullPath, qrPath, 200, 120, identity, 200, 50,\
+                          f"Project: {project}", f"Floor: {floor}", f"Unit: {unit}")
