@@ -20,6 +20,11 @@ def add_image_and_text_to_pdf(pdf_path, image_path, image_pos_x, image_pos_y, te
     # Note: The 'insert_text' method requires specifying the bottom-left corner of the text block
     page.insert_text((text_pos_x, text_pos_y), text, fontsize=10)
 
+    # For extra text, repeat the process of drawing a white background then adding text
+    # Adjust the rectangle size and position as needed for each text block
+    text_extra_bg_rect = fitz.Rect(text_extra_x, text_extra_y - 10, text_extra_x + 350, text_extra_y + 10)  # Adjust size as needed
+    page.draw_rect(text_extra_bg_rect, color=(1, 1, 1), fill=(1, 1, 1))  # Draw white rectangle for extra text
+
     page.insert_text((text_extra_x, text_extra_y), text_extra1, fontsize=10)
     page.insert_text((text_extra_x+80, text_extra_y), text_extra2, fontsize=10)
     page.insert_text((text_extra_x+110, text_extra_y), text_extra3, fontsize=10)
