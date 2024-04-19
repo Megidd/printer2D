@@ -27,7 +27,7 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
         writer.writerow(row)
 
     if not found:
-      print(f"Line with VARL: {varl_value} and VARW: {varw_value} not found on the CSV file.")
+      print(f"Line with VARL: {varl_value} and VARW: {varw_value} is already deleted from the CSV file.")
 
   move_and_overwrite(tmpFile, filename)
   return project, floor, unit, id, name
