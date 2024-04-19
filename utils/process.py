@@ -41,9 +41,9 @@ def analyze(pdfPath, csv_file_path):
 
     qrcode.save(
         qrPath,
-        scale=5,
-        border=2,
+        scale=4,
+        border=0,
     )
 
-    add_image_and_text_to_pdf(pdfPath, qrPath, 200, 120, identity, 200, 50,\
-                            f"Project: {project}", f"Floor: {floor}", f"Unit: {unit}")
+    add_image_and_text_to_pdf(pdfPath, qrPath, 10, 70, identity, 90, 70,\
+                            f"Project: {project}", f"Floor: {floor}", f"Unit: {unit}", 90, 20)
