@@ -9,7 +9,7 @@ def add_image_and_text_to_pdf(pdf_path, image_path, image_pos_x, image_pos_y, te
     page = doc[0]
 
     # Add the image to the specified location
-    page.insert_image(fitz.Rect(image_pos_x, image_pos_y, image_pos_x + 45, image_pos_y + 45), filename=image_path)
+    page.insert_image(fitz.Rect(image_pos_x, image_pos_y, image_pos_x + 42, image_pos_y + 42), filename=image_path)
 
     # Before adding text, draw a white rectangle as the background
     # Adjust the rectangle size and position as needed to cover the text area

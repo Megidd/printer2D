@@ -45,5 +45,5 @@ def analyze(pdfPath, csv_file_path):
         border=0,
     )
 
-    add_image_and_text_to_pdf(pdfPath, qrPath, 10, 70, identity, 55, 100,\
+    add_image_and_text_to_pdf(pdfPath, qrPath, 10, 68, identity, 55, 92,\
                             f"P: {project}", f"F: {floor}", f"U: {unit}", 5, 20)
