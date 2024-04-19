@@ -4,7 +4,7 @@ import win32com.client as win32
 from utils.process import analyze
 from utils.tempfile import create_temp_file
 from utils.overwrite import delete
-
+from utils.send import send2printer
 
 def main(csv_file_path):
     objFSO = win32.Dispatch("Scripting.FileSystemObject")
@@ -44,7 +44,7 @@ def main(csv_file_path):
 
         analyze(pdfPath, csv_file_path)
 
-        os.startfile(pdfPath, "print")
+        send2printer(pdfPath)
 
         if production_mode:
             delete(pdfPath)
