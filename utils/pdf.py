@@ -9,15 +9,15 @@ def add_image_and_text_to_pdf(pdf_path, image_path, image_pos_x, image_pos_y, te
     page = doc[0]
 
     # Add the image to the specified location
-    page.insert_image(fitz.Rect(image_pos_x, image_pos_y, image_pos_x + 100, image_pos_y + 100), filename=image_path)
+    page.insert_image(fitz.Rect(image_pos_x, image_pos_y, image_pos_x + 40, image_pos_y + 40), filename=image_path)
 
     # Add the text to the specified location
     # Note: The 'insert_text' method requires specifying the bottom-left corner of the text block
-    page.insert_text((text_pos_x, text_pos_y), text, fontsize=11)
+    page.insert_text((text_pos_x, text_pos_y), text, fontsize=9)
 
-    page.insert_text((text_extra_x, text_extra_y), text_extra1, fontsize=11)
-    page.insert_text((text_extra_x+50, text_extra_y), text_extra2, fontsize=11)
-    page.insert_text((text_extra_x+80, text_extra_y), text_extra3, fontsize=11)
+    page.insert_text((text_extra_x, text_extra_y), text_extra1, fontsize=9)
+    page.insert_text((text_extra_x+50, text_extra_y), text_extra2, fontsize=9)
+    page.insert_text((text_extra_x+80, text_extra_y), text_extra3, fontsize=9)
 
     # Save the modified PDF
     doc.save(pdf_path, incremental=True, encryption=fitz.PDF_ENCRYPT_KEEP)
