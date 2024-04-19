@@ -5,47 +5,59 @@ from utils.process import analyze
 from utils.tempfile import create_temp_file
 from utils.overwrite import delete
 
-objFSO = win32.Dispatch("Scripting.FileSystemObject")
-ShellObj = win32.Dispatch("Shell.Application")
-clawPDFQueue = win32.Dispatch("clawPDF.JobQueue")
 
-print("Initializing clawPDF queue...")
-clawPDFQueue.Initialize()
+def main(csv_file_path):
+    objFSO = win32.Dispatch("Scripting.FileSystemObject")
+    ShellObj = win32.Dispatch("Shell.Application")
+    clawPDFQueue = win32.Dispatch("clawPDF.JobQueue")
 
-print("Please print to clawPDF ...")
+    print("Initializing clawPDF queue...")
+    clawPDFQueue.Initialize()
 
-production_mode = False
+    print("Please print to clawPDF ...")
 
-while True:
-    print("Waiting for the job to arrive at the queue...")
-    print("Currently there are", clawPDFQueue.Count, "job(s) in the queue")
-    printJob = clawPDFQueue.WaitForFirstJob()
+    production_mode = False
 
-    printJob.SetProfileByGuid("DefaultGuid")
+    while True:
+        print("Waiting for the job to arrive at the queue...")
+        print("Currently there are", clawPDFQueue.Count, "job(s) in the queue")
+        printJob = clawPDFQueue.WaitForFirstJob()
 
-    pdfPath = create_temp_file(prefix="WinCAM-label-", suffix=".pdf")
-    print(f"Temp file created at: {pdfPath}")
+        printJob.SetProfileByGuid("DefaultGuid")
 
-    out_dir = os.path.dirname(pdfPath)
-    if not os.path.exists(out_dir):
-        print("Creating output directory:", out_dir)
-        os.makedirs(out_dir)
+        pdfPath = create_temp_file(prefix="WinCAM-label-", suffix=".pdf")
+        print(f"Temp file created at: {pdfPath}")
 
-    printJob.SetProfileSetting("OutputFormat", "Pdf")
-    printJob.SetProfileSetting("OpenViewer", False)
-    printJob.ConvertTo(pdfPath)
+        out_dir = os.path.dirname(pdfPath)
+        if not os.path.exists(out_dir):
+            print("Creating output directory:", out_dir)
+            os.makedirs(out_dir)
 
-    if (not printJob.IsFinished or not printJob.IsSuccessful):
-        print("Could not convert the file:", pdfPath)
-    else:
-        print("Job finished successfully")
+        printJob.SetProfileSetting("OutputFormat", "Pdf")
+        printJob.SetProfileSetting("OpenViewer", False)
+        printJob.ConvertTo(pdfPath)
 
-    analyze(pdfPath)
+        if (not printJob.IsFinished or not printJob.IsSuccessful):
+            print("Could not convert the file:", pdfPath)
+        else:
+            print("Job finished successfully")
 
-    os.startfile(pdfPath, "print")
+        analyze(pdfPath, csv_file_path)
 
-    if production_mode:
-        delete(pdfPath)
+        os.startfile(pdfPath, "print")
 
-print("Releasing the object")
-clawPDFQueue.ReleaseCom()
+        if production_mode:
+            delete(pdfPath)
+
+    print("Releasing the object")
+    clawPDFQueue.ReleaseCom()
+
+if __name__ == "__main__":
+    csv_file_path = 'CUTTING-LIST.csv'
+    try:
+        main(csv_file_path)
+    except Exception as Ex:
+        print(Ex)
+
+    # To prevent the window from closing immediately after run
+    input("Finished. Press any key to continue . . .")
