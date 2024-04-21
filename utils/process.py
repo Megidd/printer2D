@@ -29,12 +29,13 @@ def analyze(pdfPath, csv_file_path):
         print("Not expected: the list has less than two items.")
         return
 
-    project, floor, unit, id, name = find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
-    print(f"Found: ID: {id}, name: {name}")
+    project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN = \
+        find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
+    print(f"Found: ID: {id}, description: {desc}, name: {name}")
 
-    identity = f"{id}-{name}"
+    id_name = f"{id}-{name}"
 
-    qrcode = segno.make_qr(identity)
+    qrcode = segno.make_qr(id_name)
 
     qrPath = create_temp_file("QR-", ".png")
     print(f"Temp file created at: {qrPath}")
@@ -45,5 +46,10 @@ def analyze(pdfPath, csv_file_path):
         border=0,
     )
 
-    create_pdf_with_image_and_text(pdfPath, qrPath, 10, 68, identity, 55, 92,\
-                                   f"P: {project}", f"F: {floor}", f"U: {unit}", 5, 20)
+    id_desc = f"{id}-{desc}"
+
+    create_pdf_with_image_and_text(pdfPath, qrPath, \
+                                   f"P: {project}", f"F: {floor}", f"U: {unit}", \
+                                    id_desc, \
+                                        length, marginH, width, marginV, rowN, \
+                                   )

@@ -1,6 +1,10 @@
 import fitz  # Import the PyMuPDF library
 
-def create_pdf_with_image_and_text(output_pdf_path, image_path, image_pos_x, image_pos_y, text, text_pos_x, text_pos_y, text_extra1, text_extra2, text_extra3, text_extra_x, text_extra_y):
+def create_pdf_with_image_and_text(pdfPath, qrPath, \
+                                    project, floor, unit, \
+                                    id_desc, \
+                                    length, marginH, width, marginV, rowN, \
+                                    ):
     # Create a new PDF document
     doc = fitz.open()
 
@@ -12,15 +16,21 @@ def create_pdf_with_image_and_text(output_pdf_path, image_path, image_pos_x, ima
     page = doc.new_page(width=page_width, height=page_height)
 
     # Add the image to the specified location
-    page.insert_image(fitz.Rect(image_pos_x, image_pos_y, image_pos_x + 42, image_pos_y + 42), filename=image_path)
+    page.insert_image(fitz.Rect(50, 30, 50 + 50, 30 + 50), filename=qrPath)
 
     # Add the text to the specified location
-    page.insert_text((text_pos_x, text_pos_y), text, fontsize=10)
+    page.insert_text((20, 92), id_desc, fontsize=12)
 
-    page.insert_text((text_extra_x, text_extra_y), text_extra1, fontsize=10)
-    page.insert_text((text_extra_x+80, text_extra_y), text_extra2, fontsize=10)
-    page.insert_text((text_extra_x+110, text_extra_y), text_extra3, fontsize=10)
+    page.insert_text((10+5, 20+5), project, fontsize=12)
+    page.insert_text((10+5, 20+25), floor, fontsize=12)
+    page.insert_text((10+5, 20+45), unit, fontsize=12)
+
+    page.insert_text((10, 10), length, fontsize=12)
+    page.insert_text((10, 10), marginH, fontsize=12)
+    page.insert_text((10, 10), width, fontsize=12)
+    page.insert_text((10, 10), marginV, fontsize=12)
+    page.insert_text((10, 20), rowN, fontsize=12)
 
     # Save the new PDF
-    doc.save(output_pdf_path)
+    doc.save(pdfPath)
     doc.close()
