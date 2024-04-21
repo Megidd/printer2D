@@ -3,7 +3,7 @@ import os
 import re
 import segno
 from utils.csv import find_and_delete_row
-from utils.pdf import add_image_and_text_to_pdf
+from utils.pdf import create_pdf_with_image_and_text
 from utils.tempfile import create_temp_file
 
 def analyze(pdfPath, csv_file_path):
@@ -45,5 +45,5 @@ def analyze(pdfPath, csv_file_path):
         border=0,
     )
 
-    add_image_and_text_to_pdf(pdfPath, qrPath, 10, 68, identity, 55, 92,\
-                            f"P: {project}", f"F: {floor}", f"U: {unit}", 5, 20)
+    create_pdf_with_image_and_text(pdfPath, qrPath, 10, 68, identity, 55, 92,\
+                                   f"P: {project}", f"F: {floor}", f"U: {unit}", 5, 20)
