@@ -51,5 +51,5 @@ def analyze(pdfPath, csv_file_path):
     create_pdf_with_image_and_text(pdfPath, qrPath, \
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
                                     id_desc, \
-                                        length, marginH, width, marginV, rowN, \
+                                        f"LxW: {length} x {width}", f" __ : {marginH}", f" | : {marginV}", f"r: {rowN}", \
                                    )

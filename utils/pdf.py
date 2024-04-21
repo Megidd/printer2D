@@ -3,7 +3,7 @@ import fitz  # Import the PyMuPDF library
 def create_pdf_with_image_and_text(pdfPath, qrPath, \
                                     project, floor, unit, \
                                     id_desc, \
-                                    length, marginH, width, marginV, rowN, \
+                                    lengthXwidth, marginH, marginV, rowN, \
                                     ):
     # Create a new PDF document
     doc = fitz.open()
@@ -25,9 +25,8 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     page.insert_text((10+5, 20+25), floor, fontsize=12)
     page.insert_text((10+5, 20+45), unit, fontsize=12)
 
-    page.insert_text((10, 10), length, fontsize=12)
+    page.insert_text((10, 10), lengthXwidth, fontsize=12)
     page.insert_text((10, 10), marginH, fontsize=12)
-    page.insert_text((10, 10), width, fontsize=12)
     page.insert_text((10, 10), marginV, fontsize=12)
     page.insert_text((10, 20), rowN, fontsize=12)
 
