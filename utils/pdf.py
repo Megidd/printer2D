@@ -29,9 +29,9 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     page.insert_text((105, 80), rowN, fontsize=12)
 
     # margin == 0 : do nothing.
-    if marginH == 1:
+    if marginH == "1":
         page.insert_text((10, 5), "___________", fontsize=36)
-    elif marginH == 2:
+    elif marginH == "2":
         page.insert_text((10, 5), "___________", fontsize=36)
         page.insert_text((10, 115), "___________", fontsize=36)
 
