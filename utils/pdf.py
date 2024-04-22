@@ -35,6 +35,16 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
         page.insert_text((10, 5), "______", fontsize=36)
         page.insert_text((10, 105), "______", fontsize=36)
 
+    # margin == 0 : do nothing.
+    if marginV == "1":
+        text = page.insert_text((10, 5), "____", fontsize=36)
+        text.rotate(90)
+    elif marginV == "2":
+        text = page.insert_text((10, 5), "____", fontsize=36)
+        text.rotate(90)
+        page.insert_text((105, 5), "____", fontsize=36)
+        text.rotate(90)
+
     # Save the new PDF
     doc.save(pdfPath)
     doc.close()
