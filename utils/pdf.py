@@ -37,17 +37,17 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
 
     # margin == 0 : do nothing.
     if marginV == "1":
-        page.insert_text((5, 5), "|", fontsize=36)
-        page.insert_text((5, 50), "|", fontsize=36)
-        page.insert_text((5, 105), "|", fontsize=36)
+        page.insert_text((5, 38), "|", fontsize=36)
+        page.insert_text((5, 68), "|", fontsize=36)
+        page.insert_text((5, 100), "|", fontsize=36)
     elif marginV == "2":
-        page.insert_text((5, 5), "|", fontsize=36)
-        page.insert_text((5, 50), "|", fontsize=36)
-        page.insert_text((5, 105), "|", fontsize=36)
+        page.insert_text((5, 38), "|", fontsize=36)
+        page.insert_text((5, 68), "|", fontsize=36)
+        page.insert_text((5, 100), "|", fontsize=36)
 
-        page.insert_text((105, 5), "|", fontsize=36)
-        page.insert_text((105, 50), "|", fontsize=36)
-        page.insert_text((105, 105), "|", fontsize=36)
+        page.insert_text((130, 38), "|", fontsize=36)
+        page.insert_text((130, 68), "|", fontsize=36)
+        page.insert_text((130, 100), "|", fontsize=36)
 
     # Save the new PDF
     doc.save(pdfPath)
