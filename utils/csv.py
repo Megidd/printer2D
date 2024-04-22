@@ -32,8 +32,8 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
       else:
         print("Warning: count string is not a valid integer.")
         continue
-      if not found and count > 0 and row[8] == str(varl_value) and row[11] == str(varw_value) or \
-        not found and count > 0 and row[8] == str(varw_value) and row[11] == str(varl_value):
+      if not found and count > 0 and row[0] == str(varl_value) and row[2] == str(varw_value) or \
+        not found and count > 0 and row[0] == str(varw_value) and row[2] == str(varl_value):
         project, floor, unit = row[11], row[12], row[13]
         id, desc, name = row[9], row[8], row[10] # ID, Tag, Qrcode
         length, marginH, width, marginV = row[0], row[1], row[2], row[3]
