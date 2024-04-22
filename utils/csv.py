@@ -40,7 +40,7 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
         rowN = f"{rowInt}"
         found = True
         row[4] = count -1
-        print(f"Found line: {id}, {name}, count change: {count} > {row[5]}")
+        print(f"Found line: {id}, {name}, count change: {count} > {row[4]}")
         writer.writerow(row)
       else:
         writer.writerow(row)
