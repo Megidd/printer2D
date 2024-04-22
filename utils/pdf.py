@@ -30,10 +30,10 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
 
     # margin == 0 : do nothing.
     if marginH == "1":
-        page.insert_text((10, 20), "___________", fontsize=36)
+        page.insert_text((10, 5), "___________", fontsize=36)
     elif marginH == "2":
-        page.insert_text((10, 20), "___________", fontsize=36)
-        page.insert_text((10, 80), "___________", fontsize=36)
+        page.insert_text((10, 5), "___________", fontsize=36)
+        page.insert_text((10, 110), "___________", fontsize=36)
 
     # Save the new PDF
     doc.save(pdfPath)
