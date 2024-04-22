@@ -31,7 +31,7 @@ def analyze(pdfPath, csv_file_path):
 
     project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN = \
         find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
-    print(f"Found: ID: {id}, description: {desc}, name: {name}")
+    print(f"Found: ID: {id}, tag: {desc}, name: {name}, margin __: {marginH}, margin |: {marginV}")
 
     id_name = f"{id}-{name}"
 
