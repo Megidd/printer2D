@@ -15,7 +15,7 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
   marginV = ""
   rowN = ""
   
-  tmpFile = create_temp_file("cuting-list-cut-", ".csv")
+  tmpFile = create_temp_file("cutting-list-cut-", ".csv")
 
   with open(filename, 'r', newline='', errors='ignore') as csvfile, open(tmpFile, 'w', newline='') as new_file:
     reader = csv.reader(csvfile)

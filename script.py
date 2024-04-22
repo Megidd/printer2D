@@ -53,7 +53,7 @@ def main(csv_file_path):
     clawPDFQueue.ReleaseCom()
 
 if __name__ == "__main__":
-    csv_file_path = 'cuting-list-cut.csv'
+    csv_file_path = 'cutting-list.csv'
     try:
         main(csv_file_path)
     except Exception as Ex:
