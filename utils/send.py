@@ -9,4 +9,6 @@ def send2printer(pdfPath):
     if toPrinterPath is not None:
         subprocess.run(f'PDFtoPrinter.exe "{pdfPath}"', shell=True)
     else:
+        print(f'Missing "PDFtoPrinter.exe":')
+        print("https://github.com/emendelson/pdftoprinter/blob/main/PDFtoPrinter.exe?raw=true")
         os.startfile(pdfPath, "print")
