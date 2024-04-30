@@ -21,7 +21,6 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     page.insert_font(fontname='my-font', fontfile= 'Tahoma.ttf', set_simple=False)
 
     # Add the text to the specified location
-    id_desc = id_desc[::-1]  # Reverse the text
     page.insert_text((20, 92), id_desc, fontname='my-font', fontsize=12)
 
     page.insert_text((10+5, 20+5), project, fontname='my-font', fontsize=12)
