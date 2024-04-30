@@ -18,19 +18,19 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     # Add the image to the specified location
     page.insert_image(fitz.Rect(50, 30, 50 + 50, 30 + 50), filename=qrPath)
 
-    page.insert_font(fontname='my-font', fontfile= 'Tahoma.ttf', set_simple=False)
+    rtlFont = fitz.Font(fontname='my-font', fontfile='Tahoma.ttf', language='ar')
 
     # Add the text to the specified location
     # Create a TextWriter object for the page
     writer = fitz.TextWriter(page.rect)
 
     # Use the TextWriter to add Hebrew text
-    writer.append((20, 92), id_desc, fontsize=11, right_to_left=True, language='ar')
-    writer.append((10+5, 20+5), project, fontsize=12, right_to_left=False, language='ar')
-    writer.append((10+5, 20+25), floor, fontsize=12, right_to_left=False, language='ar')
-    writer.append((10+5, 20+45), unit, fontsize=12, right_to_left=False, language='ar')
-    writer.append((40, 105), lengthXwidth, fontsize=12, right_to_left=False, language='ar')
-    writer.append((105, 80), rowN, fontsize=12, right_to_left=False, language='ar')
+    writer.append((20, 92), id_desc, fontsize=11, right_to_left=True, language='ar', font=rtlFont)
+    writer.append((10+5, 20+5), project, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
+    writer.append((10+5, 20+25), floor, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
+    writer.append((10+5, 20+45), unit, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
+    writer.append((40, 105), lengthXwidth, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
+    writer.append((105, 80), rowN, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
 
     writer.write_text(page)
 
