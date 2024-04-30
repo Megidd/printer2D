@@ -21,7 +21,12 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     page.insert_font(fontname='my-font', fontfile= 'Tahoma.ttf', set_simple=False)
 
     # Add the text to the specified location
-    page.insert_text((20, 92), id_desc, fontname='my-font', fontsize=12)
+    # Create a TextWriter object for the page
+    writer = fitz.TextWriter(page.rect)
+
+    # Use the TextWriter to add Hebrew text
+    writer.append((20, 92), id_desc, fontsize=11, right_to_left=True, language='ar')
+    writer.write_text(page)
 
     page.insert_text((10+5, 20+5), project, fontname='my-font', fontsize=12)
     page.insert_text((10+5, 20+25), floor, fontname='my-font', fontsize=12)
