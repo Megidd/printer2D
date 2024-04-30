@@ -18,15 +18,17 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     # Add the image to the specified location
     page.insert_image(fitz.Rect(50, 30, 50 + 50, 30 + 50), filename=qrPath)
 
+    page.insert_font(fontname='my-font', fontfile= 'Tahoma.ttf', set_simple=False)
+
     # Add the text to the specified location
-    page.insert_text((20, 92), id_desc, fontsize=12)
+    page.insert_text((20, 92), id_desc, fontname='my-font', fontsize=12)
 
-    page.insert_text((10+5, 20+5), project, fontsize=12)
-    page.insert_text((10+5, 20+25), floor, fontsize=12)
-    page.insert_text((10+5, 20+45), unit, fontsize=12)
+    page.insert_text((10+5, 20+5), project, fontname='my-font', fontsize=12)
+    page.insert_text((10+5, 20+25), floor, fontname='my-font', fontsize=12)
+    page.insert_text((10+5, 20+45), unit, fontname='my-font', fontsize=12)
 
-    page.insert_text((40, 105), lengthXwidth, fontsize=12)
-    page.insert_text((105, 80), rowN, fontsize=12)
+    page.insert_text((40, 105), lengthXwidth, fontname='my-font', fontsize=12)
+    page.insert_text((105, 80), rowN, fontname='my-font', fontsize=12)
 
     # margin == 0 : do nothing.
     if marginH == "1":
