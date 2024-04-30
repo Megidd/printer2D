@@ -26,14 +26,13 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
 
     # Use the TextWriter to add Hebrew text
     writer.append((20, 92), id_desc, fontsize=11, right_to_left=True, language='ar')
+    writer.append((10+5, 20+5), project, fontsize=12, right_to_left=False, language='ar')
+    writer.append((10+5, 20+25), floor, fontsize=12, right_to_left=False, language='ar')
+    writer.append((10+5, 20+45), unit, fontsize=12, right_to_left=False, language='ar')
+    writer.append((40, 105), lengthXwidth, fontsize=12, right_to_left=False, language='ar')
+    writer.append((105, 80), rowN, fontsize=12, right_to_left=False, language='ar')
+
     writer.write_text(page)
-
-    page.insert_text((10+5, 20+5), project, fontname='my-font', fontsize=12)
-    page.insert_text((10+5, 20+25), floor, fontname='my-font', fontsize=12)
-    page.insert_text((10+5, 20+45), unit, fontname='my-font', fontsize=12)
-
-    page.insert_text((40, 105), lengthXwidth, fontname='my-font', fontsize=12)
-    page.insert_text((105, 80), rowN, fontname='my-font', fontsize=12)
 
     # margin == 0 : do nothing.
     if marginH == "1":
