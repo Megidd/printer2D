@@ -48,6 +48,13 @@ def analyze(pdfPath, csv_file_path):
 
     id_desc = f"{id}-{desc}"
 
+    # Same orientation for label and piece.
+    # Both label and piece have landscape orientation.
+    # Longest dimension is horizontal.
+    # This matters for displaying margins.
+    if width > length:
+        marginH, marginV = marginV, marginH
+
     create_pdf_with_image_and_text(pdfPath, qrPath, \
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
                                     id_desc, \
