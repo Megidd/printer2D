@@ -31,7 +31,7 @@ def analyze(pdfPath, csv_file_path):
 
     project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN = \
         find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
-    print(f"Found: ID: {id}, tag: {desc}, name: {name}, margin __: {marginH}, margin |: {marginV}")
+    print(f"Found: ID: {id}, tag: {desc}, name: {name}")
 
     id_name = f"{id}-{name}"
 
@@ -54,6 +54,8 @@ def analyze(pdfPath, csv_file_path):
     # This matters for displaying margins.
     if width > length:
         marginH, marginV = marginV, marginH
+
+    print(f"Found: ID: {id}, tag: {desc}, name: {name}, margin __: {marginH}, margin |: {marginV}")
 
     create_pdf_with_image_and_text(pdfPath, qrPath, \
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
