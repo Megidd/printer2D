@@ -46,8 +46,6 @@ def analyze(pdfPath, csv_file_path):
         border=0,
     )
 
-    id_desc = f"{id}-{desc}"
-
     # Same orientation for label and piece.
     # Both label and piece have landscape orientation.
     # Longest dimension is horizontal.
@@ -59,6 +57,6 @@ def analyze(pdfPath, csv_file_path):
 
     create_pdf_with_image_and_text(pdfPath, qrPath, \
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
-                                    id_desc, \
+                                    f"ID: {id}", desc, \
                                         f"L:{length} x W:{width}", marginH, marginV, f"R: {rowN}", \
                                    )
