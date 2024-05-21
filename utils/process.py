@@ -29,7 +29,7 @@ def analyze(pdfPath, csv_file_path):
         print("Not expected: the list has less than two items.")
         return
 
-    project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN = \
+    project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN, marginVSide = \
         find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
     print(f"Found: ID: {id}, tag: {desc}, name: {name}")
 
@@ -50,6 +50,12 @@ def analyze(pdfPath, csv_file_path):
     # Both label and piece have landscape orientation.
     # Longest dimension is horizontal.
     # This matters for displaying margins.
+    if width.isdigit() and length.isdigit():
+        width = int(width)
+        length = int(length)
+    else:
+        print("Warning: width & length string are not valid integers.")
+
     if width > length:
         marginH, marginV = marginV, marginH
 
@@ -59,4 +65,5 @@ def analyze(pdfPath, csv_file_path):
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
                                     f"ID: {id}", desc, \
                                         f"L:{length} x W:{width}", marginH, marginV, f"R: {rowN}", \
+                                        marginVSide, \
                                    )

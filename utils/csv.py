@@ -14,6 +14,7 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
   width = ""
   marginV = ""
   rowN = ""
+  marginVSide = ""
   
   tmpFile = create_temp_file("cutting-list-", ".csv")
 
@@ -37,6 +38,7 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
         project, floor, unit = row[11], row[12], row[13]
         id, desc, name = row[9], row[8], row[10] # ID, Tag, Qrcode
         length, marginH, width, marginV = row[0], row[1], row[2], row[3]
+        marginVSide = row[15]
         rowN = f"{rowInt}"
         found = True
         row[4] = count -1
@@ -49,4 +51,4 @@ def find_and_delete_row(filename, varl_value=600, varw_value=700):
       print(f"Line with VARL: {varl_value} and VARW: {varw_value} is already handled on the CSV file.")
 
   move_and_overwrite(tmpFile, filename)
-  return project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN
+  return project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN, marginVSide

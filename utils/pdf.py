@@ -4,6 +4,7 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
                                     project, floor, unit, \
                                     id, desc, \
                                     lengthXwidth, marginH, marginV, rowN, \
+                                    marginVSide, \
                                     ):
     # Create a new PDF document
     doc = fitz.open()
@@ -44,9 +45,19 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
 
     # margin == 0 : do nothing.
     if marginV == "1":
-        page.insert_text((5, 38), "|", fontsize=36)
-        page.insert_text((5, 68), "|", fontsize=36)
-        page.insert_text((5, 100), "|", fontsize=36)
+        if marginVSide == "r" or marginVSide == "R": # Right piece of unit is acutally left when flat on desk
+            page.insert_text((5, 38), "|", fontsize=36)
+            page.insert_text((5, 68), "|", fontsize=36)
+            page.insert_text((5, 100), "|", fontsize=36)
+        elif marginVSide == "l" or marginVSide == "L": # Left piece of unit is acutally right when flat on desk
+            page.insert_text((130, 38), "|", fontsize=36)
+            page.insert_text((130, 68), "|", fontsize=36)
+            page.insert_text((130, 100), "|", fontsize=36)
+        else:
+            print("Warning: marginVSide is not 'r' or 'l' assuming 'r'")
+            page.insert_text((5, 38), "|", fontsize=36)
+            page.insert_text((5, 68), "|", fontsize=36)
+            page.insert_text((5, 100), "|", fontsize=36)
     elif marginV == "2":
         page.insert_text((5, 38), "|", fontsize=36)
         page.insert_text((5, 68), "|", fontsize=36)
