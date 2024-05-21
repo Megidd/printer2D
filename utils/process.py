@@ -60,6 +60,7 @@ def analyze(pdfPath, csv_file_path):
         marginH, marginV = marginV, marginH
 
     print(f"Found: ID: {id}, tag: {desc}, name: {name}, margin __: {marginH}, margin |: {marginV}")
+    print(f"Found: marginVSide: {marginVSide}, rowN: {rowN}")
 
     create_pdf_with_image_and_text(pdfPath, qrPath, \
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
