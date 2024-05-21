@@ -64,7 +64,7 @@ def analyze(pdfPath, csv_file_path):
 
     create_pdf_with_image_and_text(pdfPath, qrPath, \
                                    f"P: {project}", f"F: {floor}", f"U: {unit}", \
-                                    f"ID: {id}", desc, \
+                                    f"SA: {id}", desc, \
                                         f"L:{length} x W:{width}", marginH, marginV, f"R: {rowN}", \
                                         marginVSide, \
                                    )
