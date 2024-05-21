@@ -54,7 +54,7 @@ def analyze(pdfPath, csv_file_path):
         width = int(width)
         length = int(length)
     else:
-        print("Warning: width & length string are not valid integers.")
+        print("Warning: width & length strings are not valid integers.")
 
     if width > length:
         marginH, marginV = marginV, marginH
