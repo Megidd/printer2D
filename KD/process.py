@@ -1,11 +1,8 @@
 import csv
 import pandas as pd
 
-def openCSV(input_file):
+def openCSV(input_file, output_file):
     print("input file is ", input_file)
-
-    # Load the CSV file
-    output_file = "{input_file}--comma-separated.csv".format(input_file=input_file)
 
     # Read the CSV file into a DataFrame
     df = pd.read_csv(input_file, encoding='cp1256')
