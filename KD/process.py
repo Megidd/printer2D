@@ -13,6 +13,9 @@ def openCSV(input_file):
     # Split the 'Description' column into multiple columns based on comma
     split_descriptions = df['Description'].str.split(',', expand=True)
 
+    # Rename the columns to Description0, Description1, Description2, etc.
+    split_descriptions.columns = [f'Description{i}' for i in range(split_descriptions.shape[1])]
+
     # Combine the original data with the newly created columns
     df_updated = pd.concat([df.drop(columns=['Description']), split_descriptions], axis=1)
 
