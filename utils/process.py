@@ -29,7 +29,7 @@ def analyze(pdfPath, csv_file_path):
         print("Not expected: the list has less than two items.")
         return
 
-    project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN, marginVSide = \
+    project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN, marginVSide, pre, note = \
         find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
     print(f"Found: ID: {id}, tag: {desc}, name: {name}")
 
@@ -67,4 +67,5 @@ def analyze(pdfPath, csv_file_path):
                                     f"SA: {id}", desc, \
                                         f"L:{length} x W:{width}", marginH, marginV, f"R: {rowN}", \
                                         marginVSide, \
+                                        f"pre: {pre}", f"note: {note}", \
                                    )

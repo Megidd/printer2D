@@ -5,6 +5,7 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
                                     id, desc, \
                                     lengthXwidth, marginH, marginV, rowN, \
                                     marginVSide, \
+                                    pre, note, \
                                     ):
     # Create a new PDF document
     doc = fitz.open()
@@ -33,6 +34,8 @@ def create_pdf_with_image_and_text(pdfPath, qrPath, \
     writer.append((40, 105), lengthXwidth, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
     writer.append((105, 80-10), id, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
     writer.append((105, 80), rowN, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
+    writer.append((105, 80-10), pre, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
+    writer.append((105, 80), note, fontsize=12, right_to_left=False, language='ar', font=rtlFont)
 
     writer.write_text(page)
 
