@@ -28,9 +28,6 @@ def main():
         output_csv_file = output_csv_file_entry.get()
         compare(input_barcode_txt_file, input_csv_file, output_csv_file)
 
-    root = tk.Tk()
-    root.title("Barcode Comparator")
-
     input_barcode_txt_file_label = tk.Label(root, text="Input Barcode Text File:")
     input_barcode_txt_file_label.grid(row=0, column=0, padx=5, pady=5)
 
