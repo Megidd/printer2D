@@ -23,7 +23,8 @@ def compare(input_barcode_txt_file, input_csv_file, output_csv_file):
         combined_key = (row[9] + '-' + row[10]).strip()
         if combined_key in qr_map:
             row[4] = int(row[4]) - qr_map[combined_key]
-            if row[4] <= 0:
+            # Only remove the row if the 5th column becomes exactly 0
+            if row[4] == 0:
                 continue
         modified_rows.append(row)
 
