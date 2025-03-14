@@ -23,11 +23,16 @@ def compare(input_barcode_txt_file, input_csv_file, output_csv_file):
         combined_key = (row[9] + '-' + row[10]).strip()
         if combined_key in qr_map:
             row[4] = int(row[4]) - qr_map[combined_key]
-            if row[4] <= 0:
-                continue
         modified_rows.append(row)
+
+    # Delete the zero counts
+    # It means only keep a row if the count is _not_ zero
+    modified_rows_filtered = []
+    for row in modified_rows:
+        if row[4] != 0:
+            modified_rows_filtered.append(row)
 
     # Save the modified CSV file
     with codecs.open(output_csv_file, 'w', encoding='cp1256') as f:
         writer = csv.writer(f, delimiter=',')
-        writer.writerows(modified_rows)
+        writer.writerows(modified_rows_filtered)
