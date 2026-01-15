@@ -18,6 +18,12 @@ def analyze(pdfPath, csv_file_path):
     matches = re.findall(r"\b(\d+mm)\b", text)
     print(matches)
 
+    matches_color = re.findall(r"(Band (?:2mm|1mm)\s*)(.*)", text, re.DOTALL)
+    print(f"matches_color: {matches_color}")
+
+    matches_color_extracted = matches_color[0][1].rstrip()
+    print(f"matches_color_extracted: {matches_color_extracted}")
+
     numbers = [int(re.search(r'\d+', item).group()) for item in matches]
 
     # Filter the numbers greater than 5
