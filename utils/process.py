@@ -21,8 +21,8 @@ def analyze(pdfPath, csv_file_path):
     matches_color = re.findall(r"(Band (?:2mm|1mm)\s*)(.*)", text, re.DOTALL)
     print(f"matches_color: {matches_color}")
 
-    matches_color_extracted = matches_color[0][1].rstrip()
-    print(f"matches_color_extracted: {matches_color_extracted}")
+    color_extracted = matches_color[0][1].rstrip()
+    print(f"color_extracted: {color_extracted}")
 
     numbers = [int(re.search(r'\d+', item).group()) for item in matches]
 
@@ -36,7 +36,7 @@ def analyze(pdfPath, csv_file_path):
         return
 
     project, floor, unit, id, desc, name, length, marginH, width, marginV, rowN, marginVSide, pre, note = \
-        find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1])
+        find_and_delete_row(csv_file_path, filtered_numbers[0], filtered_numbers[1], color_extracted)
     print(f"Found: ID: {id}, tag: {desc}, name: {name}")
 
     id_name = f"{id}-{name}"
