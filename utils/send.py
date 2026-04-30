@@ -11,10 +11,7 @@ def send2printer(pdfPath):
         # When pdfPath contains the DOS-style naming and short names
         # like C:\Users\ADINCU~1\..., the ~1 is being interpreted as a shell metacharacter
         # subprocess.run(f'PDFtoPrinter.exe "{pdfPath}"', shell=True)
-        # Didn't work too:
-        # subprocess.run(f'"{toPrinterPath}" "{pdfPath}"', shell=True)
-
-        subprocess.run([toPrinterPath, pdfPath], shell=False)
+        subprocess.run(f'"{toPrinterPath}" "{pdfPath}"', shell=True)
     else:
         print(f'Missing "PDFtoPrinter.exe":')
         print("https://github.com/emendelson/pdftoprinter/blob/main/PDFtoPrinter.exe?raw=true")
